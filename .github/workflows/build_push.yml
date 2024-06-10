@@ -87,7 +87,7 @@ jobs:
 
       - name: Upload APKs (chunk ${{ matrix.chunk }})
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
-        if: "github.repository == 'keiyoushi/extensions-source'"
+        if: "github.repository == 'pavan3999/extensions-source'"
         with:
           name: "individual-apks-${{ matrix.chunk }}"
           path: "**/*.apk"
@@ -100,7 +100,7 @@ jobs:
     name: Publish repo
     needs:
       - build_individual
-    if: "github.repository == 'keiyoushi/extensions-source'"
+    if: "github.repository == 'pavan3999/extensions-source'"
     runs-on: ubuntu-latest
     steps:
       - name: Download APK artifacts
@@ -132,7 +132,7 @@ jobs:
       - name: Checkout repo branch
         uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
         with:
-          repository: keiyoushi/extensions
+          repository: pavan3999/extensions
           token: ${{ secrets.BOT_PAT }}
           ref: repo
           path: repo
