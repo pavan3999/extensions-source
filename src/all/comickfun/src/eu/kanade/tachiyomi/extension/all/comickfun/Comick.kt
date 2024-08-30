@@ -9,6 +9,7 @@ import androidx.preference.SwitchPreferenceCompat
 import eu.kanade.tachiyomi.lib.i18n.Intl
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.asObservableSuccess
+import eu.kanade.tachiyomi.network.interceptor.rateLimit
 import eu.kanade.tachiyomi.source.ConfigurableSource
 import eu.kanade.tachiyomi.source.model.FilterList
 import eu.kanade.tachiyomi.source.model.MangasPage
@@ -160,6 +161,8 @@ abstract class Comick(
     }
 
     override val client = network.client.newBuilder()
+        .addNetworkInterceptor(::errorInterceptor)
+        .rateLimit(0, 0, TimeUnit.SECONDS)
         .build()
 
     private fun errorInterceptor(chain: Interceptor.Chain): Response {
