@@ -160,7 +160,6 @@ abstract class Comick(
     }
 
     override val client = network.client.newBuilder()
-        .addNetworkInterceptor(::errorInterceptor)
         .build()
 
     private fun errorInterceptor(chain: Interceptor.Chain): Response {
